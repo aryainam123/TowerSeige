@@ -6,7 +6,6 @@ const Constraint = Matter.Constraint;
 var engine, world;
 var holder,ball,ground;
 var stand1,stand2;
-var ball;
 var slingShot;
 var polygon_img;
 function preload(){
@@ -43,8 +42,25 @@ function setup() {
   //top
   block16 = new Block(390,155,30,40);
 
+   //level one
+    block17 = new Block(640,100,30,40);
+    block18 = new Block(670,100,30,40);
+    block19 = new Block(700,100,30,40);
+    block20 = new Block(730,100,30,40);
+    block21 = new Block(760,100,30,40);
 
-  
+  //  //level two
+    block22 = new Block(670,50,30,40);
+    block23 = new Block(700,50,30,40);
+    block24 = new Block(730,50,30,40);
+
+   //top level
+     block25 = new Block(700,0,30,40);  
+
+     ball = Bodies.circle(50 , 200 ,  20);
+     World.add(world , ball);
+   
+     slingShot = new SlingShot(this.ball ,  {x:100 , y:200});
 
 }
 function draw() {
@@ -52,10 +68,12 @@ function draw() {
  
   textSize(20);
   fill("lightyellow");
+  text("Drag The Hexagonal Stone And Release It , To Launch It Towards The Blocks" , 100 , 30);
   
 
   ground.display();
   stand1.display();
+  stand2.display();
   
   strokeWeight(2);
   stroke(15);
@@ -79,6 +97,32 @@ function draw() {
   block15.display();
   fill("grey");
   block16.display();
- 
 
+
+  fill("skyblue");
+  block17.display();
+   block18.display();
+   block19.display();
+   block20.display();
+   block21.display();
+
+   fill("turquoise");
+   block22.display();
+   block23.display();
+   block24.display();
+
+    fill("pink");
+    block25.display();
+
+    imageMode(CENTER)
+    image(polygon_img , ball.position.x , ball.position.y , 40 , 40);
+  
+    slingShot.display();
+}
+function mouseDragged(){
+  Matter.Body.setPosition(this.ball , {x:mouseX , y:mouseY});
+}
+
+function mouseReleased(){
+  slingShot.fly();  
 }
